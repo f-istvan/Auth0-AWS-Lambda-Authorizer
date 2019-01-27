@@ -11,11 +11,11 @@ This example application deploys an AWS API Gateway with two AWS Lambda function
 * Install serverless framework on your local
 * Create an Auth0 account and a new tenant (tenant name e.g.: qwertz543210)
 
-![New Tenant](http://https://github.com/f-istvan/Auth0-AWS-Lambda-Authorizer/pictures/new-tenant.png)
+![New Tenant](https://github.com/f-istvan/Auth0-AWS-Lambda-Authorizer/blob/master/pictures/new-tenant.png)
 
 * In Auth0 dashboard go to APIs -> API explorer and create a test application to use the API Explorer.
 
-![New API](http://https://github.com/f-istvan/Auth0-AWS-Lambda-Authorizer/pictures/new-api.png)
+![New API](https://github.com/f-istvan/Auth0-AWS-Lambda-Authorizer/blob/master/pictures/new-api.png)
 
 * After creating the test application a test token should appear on the page. Copy it and replace `<TOKEN>` in the `invoke-secure-lambda.sh` below.
 * Fill in the `./src/env.yml` file. Using the `qwertz543210` tenant we created the file should look like this:
