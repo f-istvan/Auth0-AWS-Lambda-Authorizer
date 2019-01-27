@@ -1,0 +1,40 @@
+service: Auth0LambdaAuthorizerExample
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+custom: ${file(./src/env.yml)}
+
+package:
+  individually: true
+  exclude:
+    # since './**' does not work because of a (reported) bug
+    - ".idea/**"
+    - "./src/jwt-lambda-authorizer/package.json"
+    - "./src/jwt-lambda-authorizer/package-lock.json"
+    - "invoke-secured-lambda.sh"
+    - "pictures/**"
+    - "src/env.yml"
+    - "README.md"
+
+functions:
+  Auth0AuthorizerLambda:
+    handler: src/jwt-lambda-authorizer/index.handler
+    environment:
+      AUDIENCE: ${self:custom.AUDIENCE}
+      JWKS_URI: ${self:custom.JWKS_URI}
+      TOKEN_ISSUER: ${self:custom.TOKEN_ISSUER}
+
+  Hello:
+    handler: src/hello/index.handler
+    events:
+    - http:
+        path: hello
+        method: get
+        authorizer:
+          name: Auth0AuthorizerLambda
+          type: token
+          identitySource: method.request.header.Authorization
+          identityValidationExpression: ^Bearer [-0-9a-zA-z\.]*$
+          resultTtlInSeconds: 3600
