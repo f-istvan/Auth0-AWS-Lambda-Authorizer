@@ -29,6 +29,10 @@ TOKEN_ISSUER: https://qwertz543210.auth0.com/
 #### Deploy with serverless framework
 
 ```bash
+cd src/jwt-lambda-authorizer
+npm i
+cd ../../
+
 serverless deploy --region eu-west-1
 ```
 
